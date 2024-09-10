@@ -141,6 +141,7 @@ a.nav-link:hover {
     }
 }
 
+    </style>
 </head>
 
 <body>
@@ -213,3 +214,4 @@ a.nav-link:hover {
 </body>
 
 </html>
+
