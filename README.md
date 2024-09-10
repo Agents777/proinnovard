@@ -1,196 +1,209 @@
-<p><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PIRD - ProinnovaRD</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Proinnovard - Sistemas y Proyectos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* Estilos generales */
         body {
+            font-family: 'Helvetica Neue', sans-serif;
+            color: #333;
+            background-color: #f0f4f8;
             margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .header {
-            background-color: #232f3e;
-            color: white;
-            padding: 10px 20px;
-        }
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-location {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        .location {
-            font-size: 14px;
-        }
-
-        .search-container {
-            display: flex;
-            flex-grow: 1;
-            justify-content: center;
-            max-width: 600px;
-        }
-
-        .search-bar {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 4px 0 0 4px;
-            font-size: 16px;
-        }
-
-        .search-btn {
-            padding: 10px;
-            background-color: #febd69;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-        }
-
-        .contact-btn a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: #ff9900;
-            border-radius: 4px;
-        }
-
-        .contact-btn a:hover {
-            background-color: #e68a00;
-        }
-
-        .cart-container {
-            margin-left: 20px;
-        }
-
-        .nav-bar {
-            margin-top: 10px;
-        }
-
-        .nav-bar ul {
-            list-style: none;
             padding: 0;
-            display: flex;
         }
 
-        .nav-bar ul li {
-            margin-right: 15px;
-        }
-
-        .nav-bar ul li a {
+        header {
+            background-color: #004080;
             color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 10px;
-            display: block;
-        }
-
-        .nav-bar ul li a:hover {
-            background-color: #37475a;
-            border-radius: 4px;
-        }
-
-        .contact-form {
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #f3f3f3;
-            border-radius: 8px;
-        }
-
-        .contact-form h2 {
+            padding: 2rem 1rem;
             text-align: center;
-            margin-bottom: 20px;
         }
 
-        .contact-form label {
-            display: block;
-            margin-bottom: 5px;
+        h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
         }
 
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        p {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
         }
 
-        .contact-form button {
-            width: 100%;
-            padding: 10px;
-            background-color: #232f3e;
-            color: white;
+        /* Navegación minimalista */
+        .navbar {
+            background-color: transparent;
+            padding: 1rem;
+            box-shadow: none;
+            border-bottom: 2px solid #004080;
+        }
+
+        .navbar-brand {
+            color: #004080;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: #004080;
+            font-size: 1.1rem;
+        }
+
+        .navbar-toggler {
+            color: #004080;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
         }
 
-        .contact-form button:hover {
-            background-color: #37475a;
+        /* Sección de productos */
+        .container {
+            padding: 2rem 0;
+        }
+
+        .product-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-img:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            color: #004080;
+            font-weight: bold;
+        }
+
+        .btn {
+            background-color: #ff6600;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            margin-top: 1rem;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #cc5200;
+        }
+
+        /* Footer minimalista */
+        footer {
+            background-color: #004080;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: white;
+            margin: 0 0.5rem;
+        }
+
+        footer a:hover {
+            color: #ff6600;
+        }
+
+        /* Animaciones suaves */
+        a.nav-link:hover {
+            color: #ff6600;
+            transition: color 0.3s ease;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+            }
         }
     </style>
 </head>
+
 <body>
-    <header class="header">
-        <div class="top-bar">
-            <div class="logo-location">
-                <span class="logo">PIRD</span>
-                <span class="location">Dominican Republic</span>
-            </div>
-            <div class="search-container">
-                <input type="text" class="search-bar" placeholder="Buscar en ProinnovaRD">
-                <button class="search-btn">🔍</button>
-            </div>
-            <div class="contact-btn">
-                <a href="#contacto">Contacto</a>
-            </div>
-            <div class="cart-container">
-                <a href="cart.html">Cart</a>
-            </div>
-        </div>
-        <nav class="nav-bar">
-            <ul>
-                <li><a href="#todo">Todo</a></li>
-                <li><a href="#metas">Metas</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#informacion">Información</a></li>
-            </ul>
-        </nav>
+    <header>
+        <h1>Proinnovard - Innovación en Sistemas y Proyectos</h1>
+        <p>Soluciones Tecnológicas Avanzadas para tu Negocio</p>
     </header>
 
-    <main>
-        <div id="contacto" class="contact-form">
-            <h2>Contacto</h2>
-            <form action="https://formsubmit.co/jg2777613@gmail.com" method="POST">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="message">Mensaje:</label>
-                <textarea id="message" name="message" required></textarea>
-                
-                <button type="submit">Enviar</button>
-            </form>
+    <!-- Navegación Intuitiva -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Proinnovard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </main>
+    </nav>
+
+    <!-- Sección de productos -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 1">
+                <h2>Sistema Avanzado de Gestión</h2>
+                <p>Un sistema avanzado para la gestión integral de empresas, con funciones inteligentes para automatizar tareas.</p>
+                <button class="btn">Comprar ahora</button>
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 2">
+                <h2>Software de Realidad Aumentada</h2>
+                <p>Permite a los usuarios visualizar productos en su entorno real a través de sus dispositivos móviles.</p>
+                <button class="btn">Comprar ahora</button>
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 3">
+                <h2>Inteligencia Artificial para Negocios</h2>
+                <p>Soluciones basadas en IA que impulsan la personalización y optimización de la experiencia del cliente.</p>
+                <button class="btn">Comprar ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Proinnovard. Todos los derechos reservados.</p>
+        <a href="#"><i class="fa fa-facebook-f"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
 
-</p>
