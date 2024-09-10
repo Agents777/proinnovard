@@ -68,7 +68,7 @@
         }
 
         .product-img {
-            max-width: 100%;
+            max-width: 110%;
             height: auto;
             border-radius: 10px;
             transition: transform 0.3s ease;
