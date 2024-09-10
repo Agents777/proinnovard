@@ -1,217 +1,269 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Proinnovard - Sistemas y Proyectos</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Estilos generales */
-body, html {
-    font-family: 'Helvetica Neue', sans-serif;
-    color: #333;
-    background-color: #f0f4f8;
-    margin: 0;
-    padding: 0;
-    height: 100%; /* Asegura que el body tenga el tamaño completo */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROINNOVARD - Ventas de Sistemas y Proyectos</title>
+  <link rel="stylesheet" href="* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
 }
 
 header {
-    background-color: #004080;
-    color: white;
-    padding: 2rem 1rem;
-    text-align: center;
-    min-height: 100vh; /* Ocupa toda la pantalla */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-h1 {
-    font-size: 2.8rem;
-    font-weight: bold;
+nav ul {
+  list-style: none;
+  display: flex;
 }
 
-p {
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
+nav li {
+  margin-right: 20px;
 }
 
-/* Navegación minimalista */
-.navbar {
-    background-color: white;
-    padding: 1rem;
-    border-bottom: 2px solid #004080;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+nav a {
+  text-decoration: none;
+  color: #333;
 }
 
-.navbar-brand {
-    color: #004080;
-    font-weight: bold;
+main {
+  padding: 20px;
 }
 
-.navbar-nav .nav-link {
-    color: #004080;
-    font-size: 1.1rem;
+section {
+  margin-bottom: 30px;
 }
 
-.navbar-toggler {
-    color: #004080;
-    border: none;
+h1, h2 {
+  font-weight: bold;
 }
 
-.navbar-toggler-icon {
-    color: #004080;
+#inicio {
+  text-align: center;
 }
 
-/* Sección de productos */
-.container {
-    padding: 2rem 0;
+#productos ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
 }
 
-.product-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+.product-item {
+  width: 300px;
+  margin: 10px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.product-img:hover {
-    transform: scale(1.05);
+.product-item img {
+  max-width: 100%;
 }
 
-h2 {
-    font-size: 1.75rem;
-    color: #004080;
-    font-weight: bold;
-    margin-top: 1rem;
+#carrito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.btn {
-    background-color: #ff6600;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    margin-top: 1rem;
-    border: none;
-    transition: background-color 0.3s ease;
+#cart-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 300px;
 }
 
-.btn:hover {
-    background-color: #cc5200;
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
-/* Footer minimalista */
+.cart-item img {
+  max-width: 50px;
+}
+
+#total-price {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
 footer {
-    background-color: #004080;
-    color: white;
-    text-align: center;
-    padding: 1.5rem 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-footer a {
-    color: white;
-    margin: 0 0.5rem;
-}
-
-footer a:hover {
-    color: #ff6600;
-}
-
-/* Animaciones suaves */
-a.nav-link:hover {
-    color: #ff6600;
-    transition: color 0.3s ease;
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .btn {
-        padding: 0.5rem 1rem;
-    }
-}
-
-    </style>
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}">
 </head>
-
 <body>
-    <header>
-        <h1>Proinnovard - Innovación en Sistemas y Proyectos</h1>
-        <p>Soluciones Tecnológicas Avanzadas para tu Negocio</p>
-    </header>
-
-    <!-- Navegación Intuitiva -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Proinnovard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  <header>
+    <nav>F
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
     </nav>
+  </header>
 
-    <!-- Sección de productos -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 1">
-                <h2>Sistema Avanzado de Gestión</h2>
-                <p>Un sistema avanzado para la gestión integral de empresas, que automatiza tareas como la gestión de inventarios, recursos humanos y facturación, permitiendo una mayor eficiencia operativa.</p>
-                <button class="btn">Comprar ahora</button>
-            </div>
-            <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 2">
-                <h2>Software de Realidad Aumentada</h2>
-                <p>Permite a los usuarios visualizar productos en su entorno real a través de dispositivos móviles, ideal para el sector retail, decoración o educación.</p>
-                <button class="btn">Comprar ahora</button>
-            </div>
-            <div class="col-md-4 mb-4">
-                <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 3">
-                <h2>Inteligencia Artificial para Negocios</h2>
-                <p>Soluciones basadas en IA para personalizar la experiencia del cliente, analizar datos de mercado y optimizar las estrategias comerciales para mayor rendimiento.</p>
-                <button class="btn">Comprar ahora</button>
-            </div>
-        </div>
-    </div>
+  <main>
+    <section id="inicio">
+      <h1>Bienvenidos a PROINNOVARD</h1>
+      <p>Sistemas y proyectos para tu negocio.</p>
+    </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Proinnovard. Todos los derechos reservados.</p>
-        <a href="#"><i class="fa fa-facebook-f"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-instagram"></i></a>
-    </footer>
+    <section id="productos">
+      <h2>Nuestros productos</h2>
+      <input type="text" id="search" placeholder="Buscar producto...">
+      <ul id="product-list"></ul>
+    </section>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <section id="carrito">
+      <h2>Tu carrito de compras</h2>
+      <ul id="cart-items"></ul>
+      <div id="total-price"></div>
+      <button id="checkout-btn">Finalizar compra</button>
+    </section>
+
+    <section id="contacto">
+      <h2>Contáctanos</h2>
+      <form action="">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; PROINNOVARD 2024. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="const productList = document.querySelector('#product-list');
+const cartItems = document.querySelector('#cart-items');
+const totalPrice = document.querySelector('#total-price');
+const checkoutBtn = document.querySelector('#checkout-btn');
+
+let cart = [];
+
+function renderProduct(product) {
+  const productItem = document.createElement('div');
+  productItem.classList.add('product-item');
+  
+  const productName = document.createElement('h3');
+  productName.textContent = product.name;
+  
+  const productImage = document.createElement('img');
+  productImage.src = product.image;
+  productImage.alt = product.name;
+
+  const productPrice = document.createElement('p');
+  productPrice.textContent = `$${product.price.toFixed(2)}`;
+  
+  productItem.appendChild(productName);
+  productItem.appendChild(productImage);
+  productItem.appendChild(productPrice);
+
+  productList.appendChild(productItem);
+
+  productItem.addEventListener('click', () => {
+    addToCart(product);
+  });
+}
+
+function addToCart(product) {
+  const cartItem = document.createElement('li');
+  cartItem.classList.add('cart-item');
+
+  const cartItemImage = document.createElement('img');
+  cartItemImage.src = product.image;
+  cartItemImage.alt = product.name;
+
+  const cartItemName = document.createElement('h4');
+  cartItemName.textContent = product.name;
+
+  const cartItemPrice = document.createElement('p');
+  cartItemPrice.textContent = `$${product.price.toFixed(2)}`;
+
+  const cartItemQuantity = document.createElement('input');
+  cartItemQuantity.type = 'number';
+  cartItemQuantity.value = 1;
+  cartItemQuantity.min = 1;
+  cartItemQuantity.max = product.stock;
+
+  const cartItemDelete = document.createElement('button');
+  cartItemDelete.textContent = 'Eliminar';
+  cartItemDelete.addEventListener('click', () => {
+    removeFromCart(cartItems.children[i]);
+  });
+
+  cartItem.appendChild(cartItemImage);
+  cartItem.appendChild(cartItemName);
+  cartItem.appendChild(cartItemPrice);
+  cartItem.appendChild(cartItemQuantity);
+  cartItem.appendChild(cartItemDelete);
+
+  cartItems.insertBefore(cartItem, cartItems.firstChild);
+  cart.push({
+    product,
+    quantity: 1
+  });
+
+  updateTotalPrice();
+}
+
+function removeFromCart(cartItem) {
+  const index = cartItems.children.indexOf(cartItem);
+  if (index !== -1) {
+    cart.splice(index, 1);
+    cartItem.remove();
+    updateTotalPrice();
+  }
+}
+
+function updateTotalPrice() {
+  let totalPriceValue = 0;
+  for (const item of cart) {
+    totalPriceValue += item.product.price * item.quantity;
+  }
+  totalPrice.textContent = `Precio total: $${totalPriceValue.toFixed(2)}`;
+}
+
+// Event listeners
+const searchInput = document.querySelector('#search');
+searchInput.addEventListener('input', (event) => {
+  const searchString = event.target.value.toLowerCase();
+  for (let product of products) {
+    const productName = product.name.toLowerCase();
+    if (!product.name.includes(searchString)) {
+      product.element.remove();
+    } else {
+      product.element.style.display = 'block';
+    }
+  }
+});
+
+checkoutBtn.addEventListener('click', () => {
+  // Implementar la función de pago aquí
+});"></script>
 </body>
-
 </html>
-
