@@ -37,10 +37,10 @@
 
         /* Navegación minimalista */
         .navbar {
-            background-color: transparent;
+            background-color: white;
             padding: 1rem;
-            box-shadow: none;
             border-bottom: 2px solid #004080;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
@@ -56,6 +56,10 @@
         .navbar-toggler {
             color: #004080;
             border: none;
+        }
+
+        .navbar-toggler-icon {
+            color: #004080;
         }
 
         /* Sección de productos */
@@ -78,6 +82,7 @@
             font-size: 1.75rem;
             color: #004080;
             font-weight: bold;
+            margin-top: 1rem;
         }
 
         .btn {
@@ -175,19 +180,19 @@
             <div class="col-md-4 mb-4">
                 <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 1">
                 <h2>Sistema Avanzado de Gestión</h2>
-                <p>Un sistema avanzado para la gestión integral de empresas, con funciones inteligentes para automatizar tareas.</p>
+                <p>Un sistema avanzado para la gestión integral de empresas, que automatiza tareas como la gestión de inventarios, recursos humanos y facturación, permitiendo una mayor eficiencia operativa.</p>
                 <button class="btn">Comprar ahora</button>
             </div>
             <div class="col-md-4 mb-4">
                 <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 2">
                 <h2>Software de Realidad Aumentada</h2>
-                <p>Permite a los usuarios visualizar productos en su entorno real a través de sus dispositivos móviles.</p>
+                <p>Permite a los usuarios visualizar productos en su entorno real a través de dispositivos móviles, ideal para el sector retail, decoración o educación.</p>
                 <button class="btn">Comprar ahora</button>
             </div>
             <div class="col-md-4 mb-4">
                 <img src="https://via.placeholder.com/300" class="product-img" alt="Producto 3">
                 <h2>Inteligencia Artificial para Negocios</h2>
-                <p>Soluciones basadas en IA que impulsan la personalización y optimización de la experiencia del cliente.</p>
+                <p>Soluciones basadas en IA para personalizar la experiencia del cliente, analizar datos de mercado y optimizar las estrategias comerciales para mayor rendimiento.</p>
                 <button class="btn">Comprar ahora</button>
             </div>
         </div>
@@ -206,4 +211,3 @@
 </body>
 
 </html>
-
