@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PROINNOVARD - Ventas de Sistemas y Proyectos</title>
-  <link rel="stylesheet" href="* {
+  <link rel="stylesheet" href="/* styles.css */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -112,7 +113,7 @@ footer {
 </head>
 <body>
   <header>
-    <nav>F
+    <nav>
       <ul>
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#productos">Productos</a></li>
@@ -158,7 +159,8 @@ footer {
     <p>&copy; PROINNOVARD 2024. Todos los derechos reservados.</p>
   </footer>
 
-  <script src="const productList = document.querySelector('#product-list');
+  <script src="// scripts.js
+const productList = document.querySelector('#product-list');
 const cartItems = document.querySelector('#cart-items');
 const totalPrice = document.querySelector('#total-price');
 const checkoutBtn = document.querySelector('#checkout-btn');
