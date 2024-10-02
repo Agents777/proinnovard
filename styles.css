@@ -1,90 +1,126 @@
-/* Basic styles */
+/* Estilos para el body para centrar el contenido */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #ffffff;
-
-}
-button {
-  background-color: #000000;
-  color: white;
-  border-radius: 8px;
-  padding: 10px 20px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-button:hover {
-  background-color: #000000;
-  transform: scale(1.05);
-}
-.parallax {
-  background-image: url('fondo.jpg');
-  min-height: 500px; 
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-
-
-
-header {
-  background-color: #000000;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-nav ul {
-  list-style-type: none;
+  background-color: #e0e0e0;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
 }
 
-nav ul li {
-  margin: 0 15px;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-section {
-  padding: 20px;
-}
-
-.product-slider {
-  display: flex;
-  overflow-x: scroll;
-}
-
-.product {
-  margin: 0 10px;
-  padding: 10px;
-  background-color: white;
-  border: 1px solid #ddd;
-}
-
-footer {
-  background-color: #000000;
-  color: white;
+/* Estilos para el contenedor principal del juego */
+#game-container {
+  background-color: #fff;
+  padding: 30px;
+  width: 400px; /* Ancho del recuadro */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra del recuadro */
   text-align: center;
-  padding: 10px 0;
+  position: relative;
 }
 
-/* Buttons and interactions */
-button {
+/* Estilos para las preguntas, tiempo y mensajes */
+#question, #time, #result-message {
+  font-size: 24px;
+  margin: 20px 0;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Estilos para el campo de respuesta y el botón de responder */
+#answer {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  width: 80%;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s;
+}
+
+#answer:focus {
+  border-color: #4CAF50;
+}
+
+/* Botón de responder */
+#submit-answer {
+  margin: 10px 0;
   padding: 10px 20px;
-  background-color: #000000;
+  font-size: 18px;
+  background-color: #4CAF50;
   color: white;
   border: none;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#submit-answer:hover {
+  background-color: #45a049;
+  transform: translateY(-2px); /* Pequeña animación al pasar el mouse */
+}
+
+/* Botones de reinicio y compartir */
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
-  background-color: #000000;
+  transform: translateY(-2px); /* Animación */
 }
+
+#restart-game {
+  background-color: #008CBA;
+  color: white;
+}
+
+#restart-game:hover {
+  background-color: #007B9E;
+}
+
+#share-game {
+  background-color: #FF5722;
+  color: white;
+}
+
+#share-game:hover {
+  background-color: #E64A19;
+}
+
+/* Sombra sutil en los botones */
+button {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste del contenedor para pantallas pequeñas */
+@media (max-width: 500px) {
+  #game-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  #question, #time, #result-message {
+    font-size: 20px;
+  }
+
+  #submit-answer, #restart-game, #share-game {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  #answer {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
