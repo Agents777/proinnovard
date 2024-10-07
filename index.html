@@ -28,65 +28,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería   
- de Imágenes</title>
+    <title>Galería de Imágenes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height:   
- 100vh;
-            background-color: #f0f0f0;   
-
         }
-
         .grid-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             width: 90%;
             max-width: 1200px;
             margin: 20px auto;
         }
-
         .grid-gallery__item {
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
-
+        .grid-gallery__item:hover {
+            transform: scale(1.05);
+        }
         .grid-gallery__item img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
     </style>
 </head>
 <body>
     <div class="grid-gallery">
-        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/4e/67/56/4e6756555e96024483bec3446ec268b1.jpg" alt="Imagen 1"></div>
-        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/f4/c0/27/f4c0271289275fe3cfdef89eb16d9f5e.jpg" alt="Imagen 2"></div>
-        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/53/aa/be/53aabed3deb5605348e95c279d05e7b9.jpg" alt="Imagen 3"></div>
-        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/9a/ca/08/9aca08c6b7f17afe736e6d0f86f03efa.jpg" alt="Imagen 4"></div>
-        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/78/f7/20/78f72078eaf510606bd669d3c3cf7cb7.jpg" alt="Imagen 5"></div>
-        <div class="grid-gallery__item"><img src="https://i.pinimg.com/474x/da/9a/6d/da9a6d06a0459f65ad34a3b3724aaa7f.jpg" alt="Imagen 6"></div>
+        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/4e/67/56/4e6756555e96024483bec3446ec268b1.jpg" alt="Imagen 1" loading="lazy"></div>
+        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/f4/c0/27/f4c0271289275fe3cfdef89eb16d9f5e.jpg" alt="Imagen 2" loading="lazy"></div>
+        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/53/aa/be/53aabed3deb5605348e95c279d05e7b9.jpg" alt="Imagen 3" loading="lazy"></div>
+        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/9a/ca/08/9aca08c6b7f17afe736e6d0f86f03efa.jpg" alt="Imagen 4" loading="lazy"></div>
+        <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/78/f7/20/78f72078eaf510606bd669d3c3cf7cb7.jpg" alt="Imagen 5" loading="lazy"></div>
+        <div class="grid-gallery__item"><img src="https://i.pinimg.com/474x/da/9a/6d/da9a6d06a0459f65ad34a3b3724aaa7f.jpg" alt="Imagen 6" loading="lazy"></div>
     </div>
-
     <script>
-        // Obtén todas las divs de las imágenes
-        const imageDivs = document.querySelectorAll('.grid-gallery__item');
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridGallery = document.querySelector('.grid-gallery');
+            const imageDivs = Array.from(document.querySelectorAll('.grid-gallery__item'));
+            const desiredOrder = [2, 0, 1, 3, 4, 5];
 
-        // Define el orden deseado (modifica los índices para tu orden)
-        const desiredOrder = [2, 0, 1, 3, 4, 5]; // Ejemplo: Imagen 3 primero, luego 1, 0, etc.
-
-        // Recorre el orden deseado y reorganiza las divs
-        desiredOrder.forEach((index) => {
-            const divToInsert = imageDivs[index];
-            document.querySelector('.grid-gallery').appendChild(divToInsert);
+            desiredOrder.forEach(index => {
+                gridGallery.appendChild(imageDivs[index]);
+            });
         });
     </script>
 </body>
