@@ -55,6 +55,82 @@
             <p>Nuestra misión es ser un referente en el ámbito de la innovación, proporcionando soluciones tecnológicas que no solo resuelvan problemas actuales, sino que también preparen a las instituciones para enfrentar los desafíos del futuro. PRO INNOVA RD combina creatividad, tecnología avanzada y un enfoque orientado a resultados, brindando un servicio integral que va desde la conceptualización hasta la implementación y el soporte técnico de cada proyecto.</p>
         </section>
 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video en HTML</title>
+    <link rel="stylesheet" href="body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.video-container {
+    text-align: center;
+}
+
+.controls {
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input[type="range"] {
+    margin: 5px;
+}">
+</head>
+<body>
+    <div class="video-container">
+        <video id="myVideo" width="640" height="360" controls>
+            <source src="video.mp4" type="video/mp4">
+            <source src="video.ogg" type="video/ogg">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
+        <div class="controls">
+            <button onclick="playVideo()">Reproducir</button>
+            <button onclick="pauseVideo()">Pausar</button>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.1" onchange="setVolume(this.value)">
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('myVideo');
+
+        function playVideo() {
+            video.play();
+        }
+
+        function pauseVideo() {
+            video.pause();
+        }
+
+        function setVolume(value) {
+            video.volume = value;
+        }
+    </script>
+</body>
+</html>
+
+        
         <section id="proyectos">
             <h2>Proyectos</h2>
             <div class="grid-gallery">
