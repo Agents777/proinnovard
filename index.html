@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRO INNOVA RD - Discover the Future of Shopping</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <h1>PRO INNOVA RD</h1>
+    <nav>
+      <ul>
+        <li><a href="#Nosotros">Nosotros</a></li>
+        <li><a href="#Proyectos">Proyectos</a></li>
+        <li><a href="#Empresas">Empresas</a></li>
+        <li><a href="#Opciones de pago">Opciones de pago</a></li>
+        <li><a href="#Mini juego">Mini juego</a></li>
+        <li><a href="#contact">Contactanos</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Main Content -->
+  <main>
+    <!-- Nosotros Section -->
+    <section id="Nosotros">
+      <h2>Nosotros</h2>
+      <button onclick="suggestPIRD('user')">PIRD</button>
+      <button onclick="suggestpreguntasfrecuentes('user')">Preguntas frecuentes</button>
+      <button onclick="suggestpropuestas('user')">Propuestas</button>
+      <button onclick="suggesproyectosfuturos('user')">Proyectos futuros</button>
+      <button onclick="suggestproyectopionero('user')">Proyecto pionero</button>
+      <div id="nosotros"></div>
+    </section>
+    <section id="Proyectos">
+      <h2>Proyectos</h2>
+      <div class="Goldo oro" id="Goldo oro">
+        <img src="producto 1.jpg" alt="Goldo oro">
+        <p>Goldo oro</p>
+        <button>Ver pagina</button>
+      </div>
+    </section>
+
+    <!-- Empresas Section -->
+    <section id="Empresas">
+      <h2>Empresas</h2>
+      <div class="Empresas">
+        <p>Empresas:</p>
+        <button onclick="Empresas()">ver empresas</button>
+      </div>
+    </section>
+
+    <!-- Opciones de pago Section -->
+    <section id="Opciones de pago">
+      <h2>Opciones de pago</h2>
+      <p>Realiza tus pagos facil con:</p>
+      <button onclick="Applepay()">Apple Pay</button>
+      <button onclick="Paypal()">Paypal</button>
+    </section>
+
+<!-- Mini juego Section -->
+<section id="Mini juego">
+  <h2>Mini juego</h2>
+  <p>¿Sabes mucho sobre la cultura Dominicana? compruebalo!</p>
+  <!-- Aquí haces el link hacia la página del mini juego -->
+  <button onclick="window.location.href='Mini%20juego/index%20-%20Mini%20juego.html'">Jugar ahora</button>
+</section>
+
+>
+  </main>
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 PRO INNOVA RD. All rights reserved.</p>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>
