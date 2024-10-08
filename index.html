@@ -74,7 +74,7 @@
 
         
         <section id="videos">
-     <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -198,6 +198,7 @@
                 deleteButton.textContent = 'Eliminar';
                 deleteButton.addEventListener('click', () => {
                     videoItem.remove();
+                    removeVideoFromStorage(videoSrc);
                 });
 
                 videoItem.appendChild(deleteButton);
@@ -234,6 +235,29 @@
                 };
             }
 
+            // Función para guardar video en el almacenamiento local
+            function saveVideoToStorage(videoSrc, isEmbed) {
+                let videos = JSON.parse(localStorage.getItem('videos')) || [];
+                videos.push({ src: videoSrc, isEmbed: isEmbed });
+                localStorage.setItem('videos', JSON.stringify(videos));
+            }
+
+            // Función para eliminar video del almacenamiento local
+            function removeVideoFromStorage(videoSrc) {
+                let videos = JSON.parse(localStorage.getItem('videos')) || [];
+                videos = videos.filter(video => video.src !== videoSrc);
+                localStorage.setItem('videos', JSON.stringify(videos));
+            }
+
+            // Función para cargar videos del almacenamiento local
+            function loadVideosFromStorage() {
+                const videos = JSON.parse(localStorage.getItem('videos')) || [];
+                videos.forEach(video => {
+                    const videoItem = createVideoItem(video.src, video.isEmbed);
+                    videoList.appendChild(videoItem);
+                });
+            }
+
             // Subir video desde un archivo local
             videoForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -242,6 +266,7 @@
                     const videoSrc = URL.createObjectURL(file);
                     const videoItem = createVideoItem(videoSrc);
                     videoList.insertBefore(videoItem, videoList.firstChild);
+                    saveVideoToStorage(videoSrc, false);
                     videoInput.value = '';
                     videoPreviewContainer.style.display = 'none';
                 }
@@ -255,6 +280,7 @@
                     const { src, isEmbed } = processVideoUrl(videoUrl);
                     const videoItem = createVideoItem(src, isEmbed);
                     videoList.insertBefore(videoItem, videoList.firstChild);
+                    saveVideoToStorage(src, isEmbed);
                     externalVideoInput.value = '';
                 }
             });
@@ -267,11 +293,13 @@
                     videoPreviewContainer.style.display = 'block';
                 }
             });
+
+            // Cargar videos guardados al iniciar la página
+            loadVideosFromStorage();
         });
     </script>
 </body>
 </html>
-
         </section>
 
         
