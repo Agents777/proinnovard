@@ -1,292 +1,111 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRO INNOVA RD - Descubre el Futuro de las Soluciones Tecnológicas</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- ... (código existente del head) ... -->
     <style>
-        /* Estilos incrustados para la galería de imágenes */
-        .grid-gallery {
+        /* ... (estilos existentes) ... */
+        
+        /* Estilos para la sección de videos */
+        #videos {
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        #videoUploadForm {
+            margin-bottom: 20px;
+        }
+        
+        #videoPreview {
+            max-width: 100%;
+            margin-top: 10px;
+        }
+        
+        #videoList {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
         }
-        .grid-gallery__item {
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .grid-gallery__item:hover {
-            transform: scale(1.05);
-        }
-        .grid-gallery__item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>PRO INNOVA RD</h1>
-        <nav>
-            <ul>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#empresas">Empresas</a></li>
-                <li><a href="#opciones-de-pago">Opciones de pago</a></li>
-                <li><a href="#mini-juego">Mini juego</a></li>
-                <li><a href="#contacto">Contáctanos</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="nosotros">
-            <h2>Nosotros</h2>
-            <p>Somos una empresa líder en innovación tecnológica que se especializa en la creación de proyectos innovadores para instituciones públicas y privadas. Nuestro enfoque está en diseñar soluciones que impulsen la modernización y eficiencia en diversas industrias. Trabajamos en el desarrollo de sistemas empresariales personalizados, optimizando procesos internos para mejorar la productividad y la toma de decisiones en las organizaciones.</p>
-            <p>Además, PRO INNOVA RD se destaca en el diseño y desarrollo de páginas web altamente funcionales y atractivas, adaptadas a las necesidades específicas de nuestros clientes. Estas plataformas digitales son clave para fortalecer la presencia en línea de las empresas y mejorar la interacción con sus usuarios y clientes.</p>
-            <p>Nuestra misión es ser un referente en el ámbito de la innovación, proporcionando soluciones tecnológicas que no solo resuelvan problemas actuales, sino que también preparen a las instituciones para enfrentar los desafíos del futuro. PRO INNOVA RD combina creatividad, tecnología avanzada y un enfoque orientado a resultados, brindando un servicio integral que va desde la conceptualización hasta la implementación y el soporte técnico de cada proyecto.</p>
-        </section>
-
-
-
-
         
-        <section id="proyectos">
-            <h2>Proyectos</h2>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor de Video Avanzado</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .video-container {
+        .video-item {
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            max-width: 800px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .video-item video {
             width: 100%;
-        }
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            background-color: #f8f9fa;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #volumeControl {
-            width: 100px;
-            margin: 0 10px;
-        }
-        .video-list {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        .video-item {
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .video-item:hover {
-            transform: scale(1.05);
-        }
-        .video-item img {
-            width: 120px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 4px;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <div class="video-container">
-        <div class="video-wrapper">
-            <iframe id="youtubePlayer" src="https://www.youtube.com/embed/JS6uhdQJo4A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="controls">
-            <button onclick="playVideo()">Reproducir</button>
-            <button onclick="pauseVideo()">Pausar</button>
-            <input type="range" id="volumeControl" min="0" max="100" value="50" onchange="setVolume(this.value)">
-        </div>
-    </div>
-    <div class="video-list" id="videoList"></div>
-
+    <!-- ... (código existente del body) ... -->
+    
+    <main>
+        <!-- ... (secciones existentes) ... -->
+        
+        <section id="videos">
+            <h2>Videos</h2>
+            <form id="videoUploadForm">
+                <input type="file" id="videoInput" accept="video/*" required>
+                <button type="submit">Subir Video</button>
+            </form>
+            <div id="videoPreviewContainer"></div>
+            <div id="videoList"></div>
+        </section>
+        
+        <!-- ... (secciones existentes) ... -->
+    </main>
+    
+    <!-- ... (código existente del footer) ... -->
+    
     <script>
-        let player;
-        const videoIds = ['JS6uhdQJo4A', 'dQw4w9WgXcQ', 'kJQP7kiw5Fk', 'fJ9rUzIMcZQ'];
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtubePlayer', {
-                events: {
-                    'onReady': onPlayerReady,
+        // ... (scripts existentes) ...
+        
+        // Funcionalidad para cargar y mostrar videos
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoForm = document.getElementById('videoUploadForm');
+            const videoInput = document.getElementById('videoInput');
+            const videoPreviewContainer = document.getElementById('videoPreviewContainer');
+            const videoList = document.getElementById('videoList');
+            
+            videoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const file = videoInput.files[0];
+                if (file) {
+                    const videoElement = document.createElement('video');
+                    videoElement.src = URL.createObjectURL(file);
+                    videoElement.controls = true;
+                    videoElement.style.maxWidth = '100%';
+                    
+                    const videoItem = document.createElement('div');
+                    videoItem.className = 'video-item';
+                    videoItem.appendChild(videoElement);
+                    
+                    videoList.appendChild(videoItem);
+                    videoInput.value = '';
+                    
+                    // Aquí iría la lógica para subir el video a un servidor
+                    console.log('Video listo para ser subido:', file.name);
                 }
             });
-        }
-
-        function onPlayerReady(event) {
-            const volumeControl = document.getElementById('volumeControl');
-            volumeControl.value = event.target.getVolume();
-        }
-
-        function playVideo() {
-            player.playVideo();
-        }
-
-        function pauseVideo() {
-            player.pauseVideo();
-        }
-
-        function setVolume(value) {
-            player.setVolume(value);
-        }
-
-        function loadVideo(videoId) {
-            player.loadVideoById(videoId);
-        }
-
-        function createVideoList() {
-            const videoList = document.getElementById('videoList');
-            videoIds.forEach((id, index) => {
-                const thumbnail = `https://img.youtube.com/vi/${id}/default.jpg`;
-                const videoItem = document.createElement('div');
-                videoItem.className = 'video-item';
-                videoItem.innerHTML = `<img src="${thumbnail}" alt="Video ${index + 1}">`;
-                videoItem.onclick = () => loadVideo(id);
-                videoList.appendChild(videoItem);
-            });
-        }
-
-        // Cargar la API de YouTube
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // Crear la lista de videos cuando se cargue la página
-        window.onload = createVideoList;
-    </script>
-</body>
-</html>
             
-            <div class="grid-gallery">
-                <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/4e/67/56/4e6756555e96024483bec3446ec268b1.jpg" alt="Imagen 1" loading="lazy"></div>
-                <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/f4/c0/27/f4c0271289275fe3cfdef89eb16d9f5e.jpg" alt="Imagen 2" loading="lazy"></div>
-                <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/53/aa/be/53aabed3deb5605348e95c279d05e7b9.jpg" alt="Imagen 3" loading="lazy"></div>
-                <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/9a/ca/08/9aca08c6b7f17afe736e6d0f86f03efa.jpg" alt="Imagen 4" loading="lazy"></div>
-                <div class="grid-gallery__item"><img src="https://i.pinimg.com/236x/78/f7/20/78f72078eaf510606bd669d3c3cf7cb7.jpg" alt="Imagen 5" loading="lazy"></div>
-                <div class="grid-gallery__item"><img src="https://i.pinimg.com/474x/da/9a/6d/da9a6d06a0459f65ad34a3b3724aaa7f.jpg" alt="Imagen 6" loading="lazy"></div>
-            </div>
-            
-            <div class="proyecto" id="goldo-oro">
-                <img src="producto1.jpg" alt="Goldo oro">
-                <p>Goldo oro</p>
-                <button>Ver página</button>
-            </div>
-        </section>
-
-        <section id="empresas">
-            <h2>Empresas</h2>
-            <div class="empresas">
-                <p>Empresas asociadas:</p>
-                <button onclick="mostrarEmpresas()">Ver empresas</button>
-            </div>
-        </section>
-
-        <section id="opciones-de-pago">
-            <h2>Opciones de pago</h2>
-            <p>Realiza tus pagos fácilmente con:</p>
-            <button onclick="pagarConApplePay()">Apple Pay</button>
-            <button onclick="pagarConPaypal()">PayPal</button>
-        </section>
-
-        <section id="mini-juego">
-            <h2>Mini juego</h2>
-            <p>¿Sabes mucho sobre la cultura Dominicana? ¡Compruébalo!</p>
-            <button onclick="window.location.href='Mini-juego/index.html'">Jugar ahora</button>
-        </section>
-
-        <section id="contacto">
-            <h2>Contáctanos</h2>
-            <!-- Aquí puedes agregar un formulario de contacto o información de contacto -->
-        </section>
-    </main>
-
-    <footer>
-        <p>© 2024 PRO INNOVA RD. Todos los derechos reservados.</p>
-    </footer>
-
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const gridGallery = document.querySelector('.grid-gallery');
-            const imageDivs = Array.from(document.querySelectorAll('.grid-gallery__item'));
-            const desiredOrder = [2, 0, 1, 3, 4, 5];
-
-            desiredOrder.forEach(index => {
-                gridGallery.appendChild(imageDivs[index]);
+            videoInput.addEventListener('change', () => {
+                const file = videoInput.files[0];
+                if (file) {
+                    const videoPreview = document.createElement('video');
+                    videoPreview.src = URL.createObjectURL(file);
+                    videoPreview.controls = true;
+                    videoPreview.id = 'videoPreview';
+                    
+                    videoPreviewContainer.innerHTML = '';
+                    videoPreviewContainer.appendChild(videoPreview);
+                }
             });
         });
-
-        function mostrarEmpresas() {
-            // Implementar la lógica para mostrar empresas
-        }
-
-        function pagarConApplePay() {
-            // Implementar la lógica para pagar con Apple Pay
-        }
-
-        function pagarConPaypal() {
-            // Implementar la lógica para pagar con PayPal
-        }
     </script>
 </body>
 </html>
