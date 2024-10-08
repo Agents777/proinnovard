@@ -75,6 +75,72 @@
         
         <section id="videos">
         <h2>videos</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Videos</title>
+    <style>
+        /* Estilos de la página */
+        #videos {
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        #videoUploadForm, #externalVideoForm {
+            margin-bottom: 20px;
+        }
+
+        #videoPreviewContainer {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        #videoPreview {
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        #videoList {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .video-item {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .video-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .delete-button {
+            background-color: #ff4136;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section id="videos">
+            <h2>Videos</h2>
 <!DOCTYPE html> 
 <html lang="es">
 <head>
@@ -132,27 +198,98 @@
 </body>
 </html>
 
-<body>
-    <!-- ... (código existente del body) ... -->
-    
-    <main>
-        <!-- ... (secciones existentes) ... -->
-        
-        <section id="videos">
-            <h2>Videos</h2>
+            <!-- Formulario para subir videos locales -->
             <form id="videoUploadForm">
                 <input type="file" id="videoInput" accept="video/*" required>
                 <button type="submit">Subir Video</button>
             </form>
+
+            <!-- Formulario para agregar videos desde URLs externas -->
             <form id="externalVideoForm">
                 <input type="url" id="externalVideoInput" placeholder="Ingrese la URL del video externo" required>
                 <button type="submit">Agregar Video Externo</button>
             </form>
+
+            <!-- Contenedor para vista previa de videos -->
             <div id="videoPreviewContainer">
                 <h3>Vista previa</h3>
                 <video id="videoPreview" controls></video>
             </div>
+
+            <!-- Lista donde se mostrarán los videos -->
             <div id="videoList"></div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoForm = document.getElementById('videoUploadForm');
+            const externalVideoForm = document.getElementById('externalVideoForm');
+            const videoInput = document.getElementById('videoInput');
+            const externalVideoInput = document.getElementById('externalVideoInput');
+            const videoPreviewContainer = document.getElementById('videoPreviewContainer');
+            const videoPreview = document.getElementById('videoPreview');
+            const videoList = document.getElementById('videoList');
+
+            // Función para crear un elemento de video
+            function createVideoItem(videoSrc) {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                
+                const videoElement = document.createElement('video');
+                videoElement.src = videoSrc;
+                videoElement.controls = true;
+                
+                videoItem.appendChild(videoElement);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.addEventListener('click', () => {
+                    videoItem.remove();
+                });
+
+                videoItem.appendChild(deleteButton);
+
+                return videoItem;
+            }
+
+            // Subir video desde un archivo local
+            videoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const file = videoInput.files[0];
+                if (file) {
+                    const videoSrc = URL.createObjectURL(file);
+                    const videoItem = createVideoItem(videoSrc);
+                    videoList.insertBefore(videoItem, videoList.firstChild);
+                    videoInput.value = '';
+                    videoPreviewContainer.style.display = 'none';
+                }
+            });
+
+            // Agregar video desde una URL
+            externalVideoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const videoUrl = externalVideoInput.value.trim();
+                if (videoUrl) {
+                    const videoItem = createVideoItem(videoUrl);
+                    videoList.insertBefore(videoItem, videoList.firstChild);
+                    externalVideoInput.value = '';
+                }
+            });
+
+            // Mostrar vista previa del video cuando se selecciona un archivo
+            videoInput.addEventListener('change', () => {
+                const file = videoInput.files[0];
+                if (file) {
+                    videoPreview.src = URL.createObjectURL(file);
+                    videoPreviewContainer.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
         </section>
         
         <!-- ... (secciones existentes) ... -->
