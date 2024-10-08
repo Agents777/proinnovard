@@ -83,152 +83,89 @@
         /* ... (estilos existentes) ... */
         
         /* Estilos para la sección de videos en formato reels */
-#videoPreviewContainer {
-    display: none;
-    margin-bottom: 20px;
-}
-
-#videoPreview {
-    max-width: 100%;
-    margin-top: 10px;
-}
-
-#videoList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-}
-
-.video-item {
-    position: relative;
-    background-color: black;
-    border-radius: 12px;
-    overflow: hidden;
-    width: 100%;
-    max-width: 300px;
-    max-height: 533px; /* Aspect ratio 9:16 como TikTok */
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.video-item video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que el video cubra todo el contenedor */
-}
-
-.video-info {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    display: flex;
-    flex-direction: column;
-    color: white;
-}
-
-.like-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-    flex-direction: column;
-    gap: 5px;
-    text-align: center;
-}
-
-.like-button svg {
-    margin-bottom: 5px;
-    width: 24px;
-    height: 24px;
-}
-
-.like-button.liked {
-    color: #ff4136; /* Color rojo para el botón de like activado */
-}
-
-.like-count {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-#externalVideoInput {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.delete-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(255, 65, 54, 0.8); /* Rojo semitransparente */
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 50%;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-.delete-button:hover {
-    background-color: #ff4136;
-}
-
-/* Ajustes para una visualización más parecida a TikTok */
-body, html {
-    margin: 0;
-    padding: 0;
-    background-color: #181818;
-    font-family: Arial, sans-serif;
-    color: white;
-}
-
-h2 {
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-form input,
-form button {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    display: block;
-    margin-bottom: 10px;
-}
-
-button {
-    background-color: #ff4136;
-    border: none;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #ff6b61;
-}
-
-    </style>
+  #videoPreviewContainer {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        #videoPreview {
+            max-width: 100%;
+            margin-top: 10px;
+        }
+        
+        #videoList {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .video-item {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .video-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .video-info {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .like-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .like-button.liked {
+            color: #ff4136;
+        }
+        
+        .like-button svg {
+            margin-right: 5px;
+        }
+        
+        .like-count {
+            font-weight: bold;
+        }
+        
+        #externalVideoInput {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        /* Botón para eliminar videos */
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ff4136;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style> 
 </head>
 <body>
     <!-- ... (código existente del body) ... -->
