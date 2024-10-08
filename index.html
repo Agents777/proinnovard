@@ -81,7 +81,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Videos</title>
     <style>
-        /* Estilos de la página */
+        /* Estilos de la página (sin cambios) */
         #videos {
             padding: 20px;
             background-color: #f0f0f0;
@@ -119,7 +119,7 @@
             max-width: 400px;
         }
 
-        .video-item video {
+        .video-item video, .video-item iframe {
             width: 100%;
             height: auto;
             display: block;
@@ -175,15 +175,23 @@
             const videoList = document.getElementById('videoList');
 
             // Función para crear un elemento de video
-            function createVideoItem(videoSrc) {
+            function createVideoItem(videoSrc, isEmbed = false) {
                 const videoItem = document.createElement('div');
                 videoItem.className = 'video-item';
                 
-                const videoElement = document.createElement('video');
-                videoElement.src = videoSrc;
-                videoElement.controls = true;
+                let mediaElement;
+                if (isEmbed) {
+                    mediaElement = document.createElement('iframe');
+                    mediaElement.src = videoSrc;
+                    mediaElement.frameBorder = "0";
+                    mediaElement.allowFullscreen = true;
+                } else {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = videoSrc;
+                    mediaElement.controls = true;
+                }
                 
-                videoItem.appendChild(videoElement);
+                videoItem.appendChild(mediaElement);
 
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'delete-button';
@@ -195,6 +203,35 @@
                 videoItem.appendChild(deleteButton);
 
                 return videoItem;
+            }
+
+            // Función para procesar la URL del video
+            function processVideoUrl(url) {
+                // YouTube
+                const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
+                if (youtubeRegex.test(url)) {
+                    const videoId = url.match(youtubeRegex)[1];
+                    return {
+                        src: `https://www.youtube.com/embed/${videoId}`,
+                        isEmbed: true
+                    };
+                }
+
+                // Vimeo
+                const vimeoRegex = /(?:https?:\/\/)?(?:www\.)?(?:vimeo\.com)\/(.+)/;
+                if (vimeoRegex.test(url)) {
+                    const videoId = url.match(vimeoRegex)[1];
+                    return {
+                        src: `https://player.vimeo.com/video/${videoId}`,
+                        isEmbed: true
+                    };
+                }
+
+                // Si no es un enlace de YouTube o Vimeo, asumimos que es un enlace directo al video
+                return {
+                    src: url,
+                    isEmbed: false
+                };
             }
 
             // Subir video desde un archivo local
@@ -215,7 +252,8 @@
                 e.preventDefault();
                 const videoUrl = externalVideoInput.value.trim();
                 if (videoUrl) {
-                    const videoItem = createVideoItem(videoUrl);
+                    const { src, isEmbed } = processVideoUrl(videoUrl);
+                    const videoItem = createVideoItem(src, isEmbed);
                     videoList.insertBefore(videoItem, videoList.firstChild);
                     externalVideoInput.value = '';
                 }
