@@ -118,6 +118,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 400px;
+            position: relative;
         }
         
         .video-item video {
@@ -162,6 +163,19 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+        
+        /* Botón para eliminar videos */
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ff4136;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -193,7 +207,6 @@
     <!-- ... (código existente del footer) ... -->
     
     <script>
-        // Funcionalidad para cargar y mostrar videos
         document.addEventListener('DOMContentLoaded', () => {
             const videoForm = document.getElementById('videoUploadForm');
             const externalVideoForm = document.getElementById('externalVideoForm');
@@ -219,6 +232,9 @@
                 const likeButton = createLikeButton();
                 videoInfo.appendChild(likeButton);
                 
+                const deleteButton = createDeleteButton(videoItem);
+                videoItem.appendChild(deleteButton);
+                
                 if (isExternal) {
                     const sourceLink = document.createElement('a');
                     sourceLink.href = videoSrc;
@@ -231,7 +247,8 @@
                 
                 return videoItem;
             }
-            
+
+            // Función para crear el botón de "Me gusta"
             function createLikeButton() {
                 const likeButton = document.createElement('button');
                 likeButton.className = 'like-button';
@@ -246,16 +263,27 @@
                     this.classList.toggle('liked');
                     const likeCount = this.querySelector('.like-count');
                     let currentLikes = parseInt(likeCount.textContent);
-                    if (this.classList.contains('liked')) {
-                        likeCount.textContent = currentLikes + 1;
-                    } else {
-                        likeCount.textContent = currentLikes - 1;
-                    }
+                    likeCount.textContent = this.classList.contains('liked') ? currentLikes + 1 : currentLikes - 1;
                 });
                 
                 return likeButton;
             }
-            
+
+            // Función para crear el botón de eliminación
+            function createDeleteButton(videoItem) {
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Eliminar';
+                
+                deleteButton.addEventListener('click', () => {
+                    videoItem.remove();
+                    saveVideos(); // Actualiza el almacenamiento local después de eliminar el video
+                });
+                
+                return deleteButton;
+            }
+
+            // Subir video desde el archivo local
             videoForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const file = videoInput.files[0];
@@ -265,9 +293,11 @@
                     videoList.insertBefore(videoItem, videoList.firstChild);
                     videoInput.value = '';
                     videoPreviewContainer.style.display = 'none';
+                    saveVideos();
                 }
             });
-            
+
+            // Agregar video desde una URL
             externalVideoForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const videoUrl = externalVideoInput.value.trim();
@@ -275,9 +305,10 @@
                     const videoItem = createVideoItem(videoUrl, true);
                     videoList.insertBefore(videoItem, videoList.firstChild);
                     externalVideoInput.value = '';
+                    saveVideos();
                 }
             });
-            
+
             videoInput.addEventListener('change', () => {
                 const file = videoInput.files[0];
                 if (file) {
@@ -304,30 +335,25 @@
             
             // Cargar videos desde localStorage
             function loadVideos() {
-                const savedVideos = JSON.parse(localStorage.getItem('savedVideos')) || [];
+                const savedVideos = JSON.parse(localStorage.getItem('savedVideos') || '[]');
                 savedVideos.forEach(videoData => {
                     const videoItem = createVideoItem(videoData.src, videoData.isExternal);
-                    const likeButton = videoItem.querySelector('.like-button');
-                    const likeCount = likeButton.querySelector('.like-count');
-                    likeCount.textContent = videoData.likes;
                     if (videoData.isLiked) {
+                        const likeButton = videoItem.querySelector('.like-button');
                         likeButton.classList.add('liked');
                     }
+                    const likeCount = videoItem.querySelector('.like-count');
+                    likeCount.textContent = videoData.likes;
                     videoList.appendChild(videoItem);
                 });
             }
             
-            // Guardar videos cuando se agrega uno nuevo o se da like
-            videoList.addEventListener('click', saveVideos);
-            videoForm.addEventListener('submit', saveVideos);
-            externalVideoForm.addEventListener('submit', saveVideos);
-            
-            // Cargar videos al iniciar la página
             loadVideos();
         });
     </script>
 </body>
 </html>
+
         </section>
 
         
