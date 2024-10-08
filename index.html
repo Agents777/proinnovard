@@ -78,39 +78,39 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Videos</title>
+    <!-- ... (código existente del head) ... -->
     <style>
-        /* Estilos de la página */
+        /* ... (estilos existentes) ... */
+        
+        /* Estilos para la sección de videos en formato reels */
         #videos {
             padding: 20px;
             background-color: #f0f0f0;
             border-radius: 8px;
             margin-top: 20px;
         }
-
+        
         #videoUploadForm, #externalVideoForm {
             margin-bottom: 20px;
         }
-
+        
         #videoPreviewContainer {
             display: none;
             margin-bottom: 20px;
         }
-
+        
         #videoPreview {
             max-width: 100%;
             margin-top: 10px;
         }
-
+        
         #videoList {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
         }
-
+        
         .video-item {
             background-color: #fff;
             border-radius: 8px;
@@ -118,53 +118,94 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 400px;
+            position: relative;
         }
-
+        
         .video-item video {
             width: 100%;
             height: auto;
             display: block;
         }
-
+        
+        .video-info {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .like-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .like-button.liked {
+            color: #ff4136;
+        }
+        
+        .like-button svg {
+            margin-right: 5px;
+        }
+        
+        .like-count {
+            font-weight: bold;
+        }
+        
+        #externalVideoInput {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        /* Botón para eliminar videos */
         .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
             background-color: #ff4136;
             border: none;
             color: white;
             cursor: pointer;
             padding: 5px 10px;
             border-radius: 5px;
-            margin-top: 5px;
         }
     </style>
 </head>
 <body>
+    <!-- ... (código existente del body) ... -->
+    
     <main>
+        <!-- ... (secciones existentes) ... -->
+        
         <section id="videos">
             <h2>Videos</h2>
-
-            <!-- Formulario para subir videos locales -->
             <form id="videoUploadForm">
                 <input type="file" id="videoInput" accept="video/*" required>
                 <button type="submit">Subir Video</button>
             </form>
-
-            <!-- Formulario para agregar videos desde URLs externas -->
             <form id="externalVideoForm">
                 <input type="url" id="externalVideoInput" placeholder="Ingrese la URL del video externo" required>
                 <button type="submit">Agregar Video Externo</button>
             </form>
-
-            <!-- Contenedor para vista previa de videos -->
             <div id="videoPreviewContainer">
                 <h3>Vista previa</h3>
                 <video id="videoPreview" controls></video>
             </div>
-
-            <!-- Lista donde se mostrarán los videos -->
             <div id="videoList"></div>
         </section>
+        
+        <!-- ... (secciones existentes) ... -->
     </main>
-
+    
+    <!-- ... (código existente del footer) ... -->
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const videoForm = document.getElementById('videoUploadForm');
@@ -174,9 +215,8 @@
             const videoPreviewContainer = document.getElementById('videoPreviewContainer');
             const videoPreview = document.getElementById('videoPreview');
             const videoList = document.getElementById('videoList');
-
-            // Función para crear un elemento de video
-            function createVideoItem(videoSrc) {
+            
+            function createVideoItem(videoSrc, isExternal = false) {
                 const videoItem = document.createElement('div');
                 videoItem.className = 'video-item';
                 
@@ -185,20 +225,65 @@
                 videoElement.controls = true;
                 
                 videoItem.appendChild(videoElement);
-
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'delete-button';
-                deleteButton.textContent = 'Eliminar';
-                deleteButton.addEventListener('click', () => {
-                    videoItem.remove();
-                });
-
+                
+                const videoInfo = document.createElement('div');
+                videoInfo.className = 'video-info';
+                
+                const likeButton = createLikeButton();
+                videoInfo.appendChild(likeButton);
+                
+                const deleteButton = createDeleteButton(videoItem);
                 videoItem.appendChild(deleteButton);
-
+                
+                if (isExternal) {
+                    const sourceLink = document.createElement('a');
+                    sourceLink.href = videoSrc;
+                    sourceLink.textContent = 'Fuente original';
+                    sourceLink.target = '_blank';
+                    videoInfo.appendChild(sourceLink);
+                }
+                
+                videoItem.appendChild(videoInfo);
+                
                 return videoItem;
             }
 
-            // Subir video desde un archivo local
+            // Función para crear el botón de "Me gusta"
+            function createLikeButton() {
+                const likeButton = document.createElement('button');
+                likeButton.className = 'like-button';
+                likeButton.innerHTML = `
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="like-count">0</span>
+                `;
+                
+                likeButton.addEventListener('click', function() {
+                    this.classList.toggle('liked');
+                    const likeCount = this.querySelector('.like-count');
+                    let currentLikes = parseInt(likeCount.textContent);
+                    likeCount.textContent = this.classList.contains('liked') ? currentLikes + 1 : currentLikes - 1;
+                });
+                
+                return likeButton;
+            }
+
+            // Función para crear el botón de eliminación
+            function createDeleteButton(videoItem) {
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Eliminar';
+                
+                deleteButton.addEventListener('click', () => {
+                    videoItem.remove();
+                    saveVideos(); // Actualiza el almacenamiento local después de eliminar el video
+                });
+                
+                return deleteButton;
+            }
+
+            // Subir video desde el archivo local
             videoForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const file = videoInput.files[0];
@@ -208,6 +293,7 @@
                     videoList.insertBefore(videoItem, videoList.firstChild);
                     videoInput.value = '';
                     videoPreviewContainer.style.display = 'none';
+                    saveVideos();
                 }
             });
 
@@ -216,13 +302,13 @@
                 e.preventDefault();
                 const videoUrl = externalVideoInput.value.trim();
                 if (videoUrl) {
-                    const videoItem = createVideoItem(videoUrl);
+                    const videoItem = createVideoItem(videoUrl, true);
                     videoList.insertBefore(videoItem, videoList.firstChild);
                     externalVideoInput.value = '';
+                    saveVideos();
                 }
             });
 
-            // Mostrar vista previa del video cuando se selecciona un archivo
             videoInput.addEventListener('change', () => {
                 const file = videoInput.files[0];
                 if (file) {
@@ -230,12 +316,43 @@
                     videoPreviewContainer.style.display = 'block';
                 }
             });
+            
+            // Guardar videos en localStorage
+            function saveVideos() {
+                const videos = Array.from(videoList.children).map(item => {
+                    const video = item.querySelector('video');
+                    const likeCount = item.querySelector('.like-count').textContent;
+                    const isLiked = item.querySelector('.like-button').classList.contains('liked');
+                    return {
+                        src: video.src,
+                        isExternal: !video.src.startsWith('blob:'),
+                        likes: parseInt(likeCount),
+                        isLiked: isLiked
+                    };
+                });
+                localStorage.setItem('savedVideos', JSON.stringify(videos));
+            }
+            
+            // Cargar videos desde localStorage
+            function loadVideos() {
+                const savedVideos = JSON.parse(localStorage.getItem('savedVideos') || '[]');
+                savedVideos.forEach(videoData => {
+                    const videoItem = createVideoItem(videoData.src, videoData.isExternal);
+                    if (videoData.isLiked) {
+                        const likeButton = videoItem.querySelector('.like-button');
+                        likeButton.classList.add('liked');
+                    }
+                    const likeCount = videoItem.querySelector('.like-count');
+                    likeCount.textContent = videoData.likes;
+                    videoList.appendChild(videoItem);
+                });
+            }
+            
+            loadVideos();
         });
     </script>
 </body>
 </html>
-
-
 
         </section>
 
