@@ -90,7 +90,12 @@
             margin-top: 20px;
         }
         
-        #videoUploadForm {
+        #videoUploadForm, #externalVideoForm {
+            margin-bottom: 20px;
+        }
+        
+        #videoPreviewContainer {
+            display: none;
             margin-bottom: 20px;
         }
         
@@ -149,6 +154,14 @@
         .like-count {
             font-weight: bold;
         }
+        
+        #externalVideoInput {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -163,7 +176,14 @@
                 <input type="file" id="videoInput" accept="video/*" required>
                 <button type="submit">Subir Video</button>
             </form>
-            <div id="videoPreviewContainer"></div>
+            <form id="externalVideoForm">
+                <input type="url" id="externalVideoInput" placeholder="Ingrese la URL del video externo" required>
+                <button type="submit">Agregar Video Externo</button>
+            </form>
+            <div id="videoPreviewContainer">
+                <h3>Vista previa</h3>
+                <video id="videoPreview" controls></video>
+            </div>
             <div id="videoList"></div>
         </section>
         
@@ -173,73 +193,137 @@
     <!-- ... (código existente del footer) ... -->
     
     <script>
-        // ... (scripts existentes) ...
-        
         // Funcionalidad para cargar y mostrar videos
         document.addEventListener('DOMContentLoaded', () => {
             const videoForm = document.getElementById('videoUploadForm');
+            const externalVideoForm = document.getElementById('externalVideoForm');
             const videoInput = document.getElementById('videoInput');
+            const externalVideoInput = document.getElementById('externalVideoInput');
             const videoPreviewContainer = document.getElementById('videoPreviewContainer');
+            const videoPreview = document.getElementById('videoPreview');
             const videoList = document.getElementById('videoList');
+            
+            function createVideoItem(videoSrc, isExternal = false) {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                
+                const videoElement = document.createElement('video');
+                videoElement.src = videoSrc;
+                videoElement.controls = true;
+                
+                videoItem.appendChild(videoElement);
+                
+                const videoInfo = document.createElement('div');
+                videoInfo.className = 'video-info';
+                
+                const likeButton = createLikeButton();
+                videoInfo.appendChild(likeButton);
+                
+                if (isExternal) {
+                    const sourceLink = document.createElement('a');
+                    sourceLink.href = videoSrc;
+                    sourceLink.textContent = 'Fuente original';
+                    sourceLink.target = '_blank';
+                    videoInfo.appendChild(sourceLink);
+                }
+                
+                videoItem.appendChild(videoInfo);
+                
+                return videoItem;
+            }
+            
+            function createLikeButton() {
+                const likeButton = document.createElement('button');
+                likeButton.className = 'like-button';
+                likeButton.innerHTML = `
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="like-count">0</span>
+                `;
+                
+                likeButton.addEventListener('click', function() {
+                    this.classList.toggle('liked');
+                    const likeCount = this.querySelector('.like-count');
+                    let currentLikes = parseInt(likeCount.textContent);
+                    if (this.classList.contains('liked')) {
+                        likeCount.textContent = currentLikes + 1;
+                    } else {
+                        likeCount.textContent = currentLikes - 1;
+                    }
+                });
+                
+                return likeButton;
+            }
             
             videoForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const file = videoInput.files[0];
                 if (file) {
-                    const videoElement = document.createElement('video');
-                    videoElement.src = URL.createObjectURL(file);
-                    videoElement.controls = true;
-                    
-                    const videoItem = document.createElement('div');
-                    videoItem.className = 'video-item';
-                    videoItem.appendChild(videoElement);
-                    
-                    const videoInfo = document.createElement('div');
-                    videoInfo.className = 'video-info';
-                    
-                    const likeButton = document.createElement('button');
-                    likeButton.className = 'like-button';
-                    likeButton.innerHTML = `
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
-                        <span class="like-count">0</span>
-                    `;
-                    
-                    likeButton.addEventListener('click', function() {
-                        this.classList.toggle('liked');
-                        const likeCount = this.querySelector('.like-count');
-                        let currentLikes = parseInt(likeCount.textContent);
-                        if (this.classList.contains('liked')) {
-                            likeCount.textContent = currentLikes + 1;
-                        } else {
-                            likeCount.textContent = currentLikes - 1;
-                        }
-                    });
-                    
-                    videoInfo.appendChild(likeButton);
-                    videoItem.appendChild(videoInfo);
-                    
-                    videoList.appendChild(videoItem);
+                    const videoSrc = URL.createObjectURL(file);
+                    const videoItem = createVideoItem(videoSrc);
+                    videoList.insertBefore(videoItem, videoList.firstChild);
                     videoInput.value = '';
-                    
-                    // Aquí iría la lógica para subir el video a un servidor
-                    console.log('Video listo para ser subido:', file.name);
+                    videoPreviewContainer.style.display = 'none';
+                }
+            });
+            
+            externalVideoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const videoUrl = externalVideoInput.value.trim();
+                if (videoUrl) {
+                    const videoItem = createVideoItem(videoUrl, true);
+                    videoList.insertBefore(videoItem, videoList.firstChild);
+                    externalVideoInput.value = '';
                 }
             });
             
             videoInput.addEventListener('change', () => {
                 const file = videoInput.files[0];
                 if (file) {
-                    const videoPreview = document.createElement('video');
                     videoPreview.src = URL.createObjectURL(file);
-                    videoPreview.controls = true;
-                    videoPreview.id = 'videoPreview';
-                    
-                    videoPreviewContainer.innerHTML = '';
-                    videoPreviewContainer.appendChild(videoPreview);
+                    videoPreviewContainer.style.display = 'block';
                 }
             });
+            
+            // Guardar videos en localStorage
+            function saveVideos() {
+                const videos = Array.from(videoList.children).map(item => {
+                    const video = item.querySelector('video');
+                    const likeCount = item.querySelector('.like-count').textContent;
+                    const isLiked = item.querySelector('.like-button').classList.contains('liked');
+                    return {
+                        src: video.src,
+                        isExternal: !video.src.startsWith('blob:'),
+                        likes: parseInt(likeCount),
+                        isLiked: isLiked
+                    };
+                });
+                localStorage.setItem('savedVideos', JSON.stringify(videos));
+            }
+            
+            // Cargar videos desde localStorage
+            function loadVideos() {
+                const savedVideos = JSON.parse(localStorage.getItem('savedVideos')) || [];
+                savedVideos.forEach(videoData => {
+                    const videoItem = createVideoItem(videoData.src, videoData.isExternal);
+                    const likeButton = videoItem.querySelector('.like-button');
+                    const likeCount = likeButton.querySelector('.like-count');
+                    likeCount.textContent = videoData.likes;
+                    if (videoData.isLiked) {
+                        likeButton.classList.add('liked');
+                    }
+                    videoList.appendChild(videoItem);
+                });
+            }
+            
+            // Guardar videos cuando se agrega uno nuevo o se da like
+            videoList.addEventListener('click', saveVideos);
+            videoForm.addEventListener('submit', saveVideos);
+            externalVideoForm.addEventListener('submit', saveVideos);
+            
+            // Cargar videos al iniciar la página
+            loadVideos();
         });
     </script>
 </body>
