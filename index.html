@@ -542,9 +542,249 @@
         </section>
 
         <section id="mini-juego">
-            <h2>Mini juego</h2>
-            <p>¿Sabes mucho sobre la cultura Dominicana? ¡Compruébalo!</p>
-            <button onclick="window.location.href='Mini-juego/index.html'">Jugar ahora</button>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Cultura Dominicana</title>
+  <link rel="stylesheet" href="/* Estilos para el body para centrar el contenido */
+body {
+  background-color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Estilos para el contenedor principal del juego */
+#game-container {
+  background-color: #fff;
+  padding: 30px;
+  width: 400px; /* Ancho del recuadro */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra del recuadro */
+  text-align: center;
+  position: relative;
+}
+
+/* Estilos para las preguntas, tiempo y mensajes */
+#question, #time, #result-message {
+  font-size: 24px;
+  margin: 20px 0;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Estilos para el campo de respuesta y el botón de responder */
+#answer {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  width: 80%;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s;
+}
+
+#answer:focus {
+  border-color: #4CAF50;
+}
+
+/* Botón de responder */
+#submit-answer {
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#submit-answer:hover {
+  background-color: #45a049;
+  transform: translateY(-2px); /* Pequeña animación al pasar el mouse */
+}
+
+/* Botones de reinicio y compartir */
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px); /* Animación */
+}
+
+#restart-game {
+  background-color: #008CBA;
+  color: white;
+}
+
+#restart-game:hover {
+  background-color: #007B9E;
+}
+
+#share-game {
+  background-color: #FF5722;
+  color: white;
+}
+
+#share-game:hover {
+  background-color: #E64A19;
+}
+
+/* Sombra sutil en los botones */
+button {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste del contenedor para pantallas pequeñas */
+@media (max-width: 500px) {
+  #game-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  #question, #time, #result-message {
+    font-size: 20px;
+  }
+
+  #submit-answer, #restart-game, #share-game {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  #answer {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+"> <!-- Vincula tu archivo CSS -->
+</head>
+<body>
+  <div id="game-container">
+    <div id="question"></div>
+    <div id="time"></div>
+    <input type="text" id="answer" placeholder="Escribe tu respuesta">
+    <button id="submit-answer">Responder</button>
+    <div id="result-message"></div>
+    <button id="start-game">Empezar Juego</button>
+    <button id="restart-game" style="display: none;">Volver a Jugar</button>
+    <button id="share-game" style="display: none;">Compartir</button>
+  </div>
+
+  <script>
+    const questions = [
+      { question: "¿Cuál es la capital de República Dominicana?", answer: "Santo Domingo" },
+      { question: "¿En qué año se independizó República Dominicana?", answer: "1844" },
+      { question: "¿Quién fue el Padre de la Patria?", answer: "Juan Pablo Duarte" },
+      // Agrega aquí las 97 preguntas restantes
+    ];
+
+    let currentQuestion = 0;
+    let time = 300; // 5 minutos en segundos (5*60)
+    let timerInterval;
+
+    document.getElementById('start-game').addEventListener('click', startGame);
+    document.getElementById('submit-answer').addEventListener('click', submitAnswer);
+    document.getElementById('restart-game').addEventListener('click', restartGame);
+    document.getElementById('share-game').addEventListener('click', shareGame);
+
+    function startGame() {
+      document.getElementById('start-game').style.display = 'none';
+      document.getElementById('restart-game').style.display = 'none';
+      document.getElementById('share-game').style.display = 'none';
+      document.getElementById('answer').style.display = 'inline-block';
+      document.getElementById('submit-answer').style.display = 'inline-block';
+      document.getElementById('result-message').innerText = "";
+
+      startTimer();
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      if (currentQuestion < questions.length) {
+        document.getElementById('question').innerText = questions[currentQuestion].question;
+        document.getElementById('answer').value = ""; // Limpiamos el campo de respuesta
+      } else {
+        endGame(true); // Si responde todas las preguntas, gana
+      }
+    }
+
+    function submitAnswer() {
+      const userAnswer = document.getElementById('answer').value.trim();
+      const correctAnswer = questions[currentQuestion].answer;
+
+      if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        endGame(false); // Si responde mal, termina el juego
+      }
+    }
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        time--;
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        document.getElementById('time').innerText = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+        
+        if (time <= 0) {
+          clearInterval(timerInterval);
+          endGame(false); // Si se acaba el tiempo, termina el juego
+        }
+      }, 1000);
+    }
+
+    function endGame(won) {
+      clearInterval(timerInterval);
+      if (won) {
+        document.getElementById('question').innerText = "¡Ganaste!";
+      } else {
+        document.getElementById('question').innerText = "Perdiste. ¿Quieres jugar de nuevo?";
+      }
+      document.getElementById('answer').style.display = 'none';
+      document.getElementById('submit-answer').style.display = 'none';
+      document.getElementById('restart-game').style.display = 'inline-block';
+      document.getElementById('share-game').style.display = 'inline-block';
+    }
+
+    function restartGame() {
+      currentQuestion = 0;
+      time = 300;
+      document.getElementById('result-message').innerText = "";
+      startGame();
+    }
+
+    function shareGame() {
+      const url = window.location.href;
+      const text = "¡Intenta superar mi puntuación en el juego de Cultura Dominicana! " + url;
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
         </section>
 
         <section id="contacto">
